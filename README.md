@@ -29,8 +29,8 @@ Secondly, some terminology: the _current address_ is a specific line number that
 
 ## Technologies used
 * [Rust](https://github.com/rust-lang/rust)
-** [Cargo](https://github.com/rust-lang/cargo)
-** [structopt](https://github.com/TeXitoi/structopt)
+  * [Cargo](https://github.com/rust-lang/cargo)
+  * [structopt](https://github.com/TeXitoi/structopt)
 * [ed](https://www.gnu.org/software/ed/)
 * [Vim](https://github.com/vim/vim) (unfortunately)
 * BetterThanVim (fortunately)

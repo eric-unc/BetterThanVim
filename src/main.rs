@@ -1,6 +1,4 @@
 use std::fs;
-use std::path::Path;
-use std::path::PathBuf;
 use structopt::StructOpt;
 
 #[derive(Debug, StructOpt)]
@@ -14,10 +12,6 @@ struct Cli {
 
 	#[structopt(parse(from_os_str))]
 	path: std::path::PathBuf
-}
-
-struct State {
-	cli: Cli
 }
 
 fn main(){
@@ -34,8 +28,6 @@ fn main(){
 	let mut content = std::fs::read_to_string(&args.path).expect("could not read file");
 
 	while prompt(&args, &mut content) {};
-
-	fs::write(&args.path, b"Lorem ipsum").expect("could not write file");
 }
 
 fn prompt(args: &Cli, content: &mut String) -> bool {
