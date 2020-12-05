@@ -28,11 +28,12 @@ Secondly, some terminology: the _current address_ is a specific line number that
 | `q` | Quits BTV.
 
 ## Technologies used
-1. [Rust](https://github.com/rust-lang/rust) (with [Cargo](https://github.com/rust-lang/cargo))
-2. [ed](https://www.gnu.org/software/ed/)
-3. [Vim](https://github.com/vim/vim) (unfortunately)
-4. BetterThanVim (fortunately)
+* [Rust](https://github.com/rust-lang/rust)
+** [Cargo](https://github.com/rust-lang/cargo)
+** [structopt](https://github.com/TeXitoi/structopt)
+* [ed](https://www.gnu.org/software/ed/)
+* [Vim](https://github.com/vim/vim) (unfortunately)
+* BetterThanVim (fortunately)
 
 ## Authors
 1. Eric Schneider
-

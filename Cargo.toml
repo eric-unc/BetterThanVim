@@ -5,3 +5,5 @@ authors = ["Eric Schneider"]
 edition = "2018"
 
 [dependencies]
+structopt = "0.3"
+
