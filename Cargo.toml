@@ -1,0 +1,7 @@
+[package]
+name = "better_than_vim"
+version = "0.1.0"
+authors = ["Eric Schneider"]
+edition = "2018"
+
+[dependencies]
