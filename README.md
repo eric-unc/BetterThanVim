@@ -15,6 +15,18 @@ Let me explain:
 4. BTV is written in Rust. You might be wondering: why does this make BTV better? Well, just take a look at [this crab](https://www.rustacean.net/).
 5. BTV doesn't steal you data. Not saying that Vim does, I'm just saying that BTV doesn't.
 
+## Commands (WIP)
+First, BTV can be run (as of now) by doing `cargo run -- file.md` where `file.md` is the file you want to edit. Then, BTV will ask for commands.
+
+Secondly, some terminology: the _current address_ is a specific line number that BTV is pointing at. This is similar to a cursor in an interactive text editor. The _buffer_ is the modified contents of your file stored in memory. Keep in mind, the buffer will not be saved to disk until you, well, save it to disk (you can do this using `w` as noted below).
+
+| Command | Description
+| :------ | :------
+| `.` | Prints the line at the current address.
+| `a` | Enters append mode, appending after the current address. Inputting `.` on a new line will exit append mode.
+| `w` | Saves the buffer to disk.
+| `q` | Quits BTV.
+
 ## Technologies used
 1. [Rust](https://github.com/rust-lang/rust) (with [Cargo](https://github.com/rust-lang/cargo))
 2. [ed](https://www.gnu.org/software/ed/)
