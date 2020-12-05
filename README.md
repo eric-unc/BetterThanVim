@@ -1,5 +1,9 @@
 # BetterThanVim
-**BetterThanVim** (BTV) is an `ed`-inspired command-based command line text editor.
+**BetterThanVim** (**BTV**) is an `ed`-inspired command-based command line text editor. Made for [queer_hack 2020](https://queer-hack.devpost.com/).
+
+<img src="gayrust.jpg" width="200">
+
+_(This image is [not made by me](https://twitter.com/whoisaldeka/status/1165148059484880896) and is licensed under CC-BY. Unfortunately there is not a bisexual version.)_
 
 ## Is BTV really better than Vim?
 Yes.
