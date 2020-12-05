@@ -16,6 +16,10 @@ struct Cli {
 	path: std::path::PathBuf
 }
 
+struct State {
+	cli: Cli
+}
+
 fn main(){
 	let args = Cli::from_args();
 
@@ -24,10 +28,43 @@ fn main(){
 			println!("Creating file as it doesn't currently exist.");
 		}
 
-		fs::write(&args.path, b"");
+		fs::write(&args.path, b"").expect("could not write file");
 	}
 
 	let mut content = std::fs::read_to_string(&args.path).expect("could not read file");
 
-	fs::write(&args.path, b"Lorem ipsum");
+	while prompt(&args, &mut content) {};
+
+	fs::write(&args.path, b"Lorem ipsum").expect("could not write file");
+}
+
+fn prompt(args: &Cli, content: &mut String) -> bool {
+	//print!("{}", args.prompt); // For some reason this isn't working rn
+
+	let mut line = String::new();
+	std::io::stdin().read_line(&mut line).unwrap();
+
+	return run_command(&args, line, content);
+}
+
+fn run_command(args: &Cli, command: String, content: &mut String) -> bool {
+	match command.as_str() {
+		"." => {
+			// TODO
+		},
+		"a" => {
+			// TODO
+		},
+		"w" => {
+			fs::write(&args.path, content.as_bytes()).expect("could not write file");
+		},
+		"q\n" => {
+			return false;
+		},
+		_ => {
+			println!("?");
+		}
+	}
+
+	return true;
 }
