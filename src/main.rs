@@ -1,4 +1,9 @@
 use std::fs;
+use std::fs::File;
+use std::fs::OpenOptions;
+//use std::io::Read;
+use std::io::BufReader;
+use std::io::BufRead;
 use structopt::StructOpt;
 
 #[derive(Debug, StructOpt)]
@@ -22,12 +27,24 @@ fn main(){
 			println!("Creating file as it doesn't currently exist.");
 		}
 
-		fs::write(&args.path, b"").expect("could not write file");
+		File::create(&args.path).expect("could not write file");
 	}
 
-	let mut content = std::fs::read_to_string(&args.path).expect("could not read file");
+	let mut file = OpenOptions::new()
+		.read(true)
+		.write(true)
+		.open(&args.path)
+		.expect("could not read file");
 
-	while prompt(&args, &mut content) {};
+	let mut buffer = Vec::<String>::new();
+
+	BufReader::new(file)
+		.lines()
+		.for_each(|l| buffer.push(l.expect("could not read line")) );
+
+	println!("{:?}", buffer);
+
+	//while prompt(&args, &mut content) {};
 }
 
 fn prompt(args: &Cli, content: &mut String) -> bool {
