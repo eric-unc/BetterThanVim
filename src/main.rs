@@ -61,7 +61,7 @@ fn run_command(args: &Cli, command: String, content: &mut String) -> bool {
 				content.push_str(line.as_str());
 
 				if args.debug {
-					println!("Appending {}", line);
+					println!("Appending {}", line.trim());
 				}
 			}
 		},
