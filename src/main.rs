@@ -77,7 +77,7 @@ fn prompt(state: &mut State) -> bool {
 fn run_command(state: &mut State, command: String) -> bool {
 	let ln = command.trim();
 
-	match ln {
+	match ln { // TODO: separate these into functions
 		"." => {
 			println!("{}", state.buffer[*state.addr]);
 		},
@@ -101,7 +101,7 @@ fn run_command(state: &mut State, command: String) -> bool {
 			if *state.addr == 0 {
 				println!("?");
 			} else {
-				*state.addr += 1;
+				*state.addr -= 1;
 			}
 		},
 		"a" => {
@@ -178,7 +178,15 @@ fn run_command(state: &mut State, command: String) -> bool {
 		},
 		"p" => {
 			if state.yank_buffer.as_str() != "" {
-				state.buffer.insert((*state.addr as usize) + 1 , state.yank_buffer.clone());
+				state.buffer.insert((*state.addr as usize) + 1, state.yank_buffer.clone());
+				*state.addr += 1;
+			} else {
+				println!("?");
+			}
+		},
+		"P" => {
+			if state.yank_buffer.as_str() != "" {
+				state.buffer.insert(*state.addr as usize, state.yank_buffer.clone());
 				*state.addr += 1;
 			} else {
 				println!("?");

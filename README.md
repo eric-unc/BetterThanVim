@@ -39,6 +39,7 @@ Secondly, some terminology:
 | `y` | Yanks (copies) the line pointed to by the current address. This will put the line in an internal buffer rather than the clipboard.
 | `x` | Cuts the line pointed to by the current address, deleting but placing it in the internal buffer.
 | `p` | Pastes whatever was last yanked after the current address, assuming that the internal yank buffer isn't empty.
+| `P` | Pastes whatever was last yanked before the current address, assuming that the internal yank buffer isn't empty.
 | `w` | Saves the buffer to disk.
 | `q` | Quits BTV.
 
