@@ -125,7 +125,7 @@ fn run_command(state: &mut State, command: String) -> bool {
 			}
 		},
 		"d" => {
-			if *state.addr != 0 {
+			if (*state.buffer).len() != 1 {
 				state.buffer.remove(*state.addr);
 
 				if *state.addr == state.buffer.len() {
@@ -141,6 +141,23 @@ fn run_command(state: &mut State, command: String) -> bool {
 		},
 		"y" => {
 			*state.yank_buffer = state.buffer[*state.addr].clone();
+		},
+		"x" => {
+			if (*state.buffer).len() != 1 {
+				*state.yank_buffer = state.buffer[*state.addr].clone();
+				state.buffer.remove(*state.addr);
+
+				if *state.addr == state.buffer.len() {
+					*state.addr -= 1;
+				}
+			} else {
+				if state.buffer[0].as_str() != "" {
+					*state.yank_buffer = state.buffer[*state.addr].clone();
+					state.buffer[0] = String::from("");
+				} else {
+					println!("?");
+				}
+			}
 		},
 		"p" => {
 			if state.yank_buffer.as_str() != "" {

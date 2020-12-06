@@ -34,6 +34,7 @@ Secondly, some terminology:
 | `c` | Enters insert mode, replacing the line pointed to by the current address. Inputting `.` will exit insert mode without changes.
 | `d` | Deletes the line pointed to by the current address. If this at the end of the file, then this will decrement the current address.
 | `y` | Yanks (copies) the line pointed to by the current address. This will put the line in an internal buffer rather than the clipboard.
+| `x` | Cuts the line pointed to by the current address, deleting but placing it in the internal buffer.
 | `p` | Pastes whatever was last yanked after the current address, assuming that the internal yank buffer isn't empty.
 | `w` | Saves the buffer to disk.
 | `q` | Quits BTV.
