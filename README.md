@@ -25,6 +25,7 @@ Secondly, some terminology:
 | Command | Description
 | :------ | :------
 | `.` | Prints the line at the current address.
+| `.<n>`, where `<n>` is a number | Prints the line at the given address.
 | `^` | Set the current address to the first line.
 | `$` | Set the current address to the last line.
 | `+` | Increment the current address by one line.

@@ -182,6 +182,7 @@ fn run_command(state: &mut State, command: String) -> bool {
 		_ => {
 			// TODO: I can't figure out how to make this static.
 			let n = Regex::new("^(\\d+)$").unwrap();
+			let dot_n = Regex::new("^.(\\d+)$").unwrap();
 
 			if n.is_match(ln) {
 				let line_num = ln.parse::<usize>().unwrap();
@@ -190,6 +191,18 @@ fn run_command(state: &mut State, command: String) -> bool {
 					println!("?");
 				} else {
 					*state.addr = line_num;
+				}
+			} else if dot_n.is_match(ln) {
+				let cap = dot_n.captures(ln).unwrap();
+
+				println!("{}", &cap[1]);
+
+				let line_num = (&cap[1]).parse::<usize>().unwrap();
+
+				if line_num >= state.buffer.len() {
+					println!("?");
+				} else {
+					println!("{}", state.buffer[line_num]);
 				}
 			} else {
 				println!("?");
