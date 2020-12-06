@@ -20,6 +20,12 @@ struct Cli {
 	path: std::path::PathBuf
 }
 
+struct State<'a> {
+	args: &'a Cli,
+	buffer: &'a mut Vec<String>,
+	addr: &'a mut usize
+}
+
 fn main(){
 	let args = Cli::from_args();
 
@@ -39,45 +45,51 @@ fn main(){
 		.lines()
 		.for_each(|l| buffer.push(l.expect("could not read line")) );
 
+	if buffer.len() == 0 {
+		buffer.push(String::from(""));
+	}
+
 	let mut addr: usize = buffer.len() - 1;
 
-	while prompt(&args, &mut addr, &mut buffer) {};
+	let mut state = State{args: &args, buffer: &mut buffer, addr: &mut addr};
+
+	while prompt(&mut state) {};
 }
 
-fn prompt(args: &Cli, addr: &mut usize, buffer: &mut Vec<String>) -> bool {
+fn prompt(state: &mut State) -> bool {
 	//print!("{}", args.prompt); // For some reason this isn't working rn
 
 	let mut line = String::new();
 	std::io::stdin().read_line(&mut line).unwrap();
 
-	return run_command(&args, line, addr, buffer);
+	return run_command(state, line);
 }
 
-fn run_command(args: &Cli, command: String, addr: &mut usize, buffer: &mut Vec<String>) -> bool {
+fn run_command(state: &mut State, command: String) -> bool {
 	let ln = command.trim();
 
 	match ln {
 		"." => {
-			println!("{}", buffer[*addr]);
+			println!("{}", state.buffer[*state.addr]);
 		},
 		"^" => {
-			*addr = 0;
+			*state.addr = 0;
 		},
 		"$" => {
-			*addr = buffer.len() - 1;
+			*state.addr = state.buffer.len() - 1;
 		},
 		"+" => {
-			if *addr + 1 >= buffer.len() {
+			if *state.addr + 1 >= state.buffer.len() {
 				println!("?");
 			} else {
-				*addr += 1;
+				*state.addr += 1;
 			}
 		},
 		"-" => {
-			if *addr == 0 {
+			if *state.addr == 0 {
 				println!("?");
 			} else {
-				*addr += 1;
+				*state.addr += 1;
 			}
 		},
 		"a" => {
@@ -90,8 +102,8 @@ fn run_command(args: &Cli, command: String, addr: &mut usize, buffer: &mut Vec<S
 					break;
 				}
 
-				buffer.insert((*addr as usize) + 1 , line);
-				*addr += 1;
+				state.buffer.insert((*state.addr as usize) + 1 , line);
+				*state.addr += 1;
 			}
 		},
 		"c" => {
@@ -100,19 +112,19 @@ fn run_command(args: &Cli, command: String, addr: &mut usize, buffer: &mut Vec<S
 			line = line.trim().to_string();
 
 			if line.as_str() != "." {
-				buffer[*addr] = line;
+				state.buffer[*state.addr] = line;
 			}
 		},
 		"d" => {
-			if *addr != 0 {
-				buffer.remove(*addr);
+			if *state.addr != 0 {
+				state.buffer.remove(*state.addr);
 
-				if *addr == buffer.len() {
-					*addr -= 1;
+				if *state.addr == state.buffer.len() {
+					*state.addr -= 1;
 				}
 			} else {
-				if buffer[0].as_str() != "" {
-					buffer[0] = String::from("");
+				if state.buffer[0].as_str() != "" {
+					state.buffer[0] = String::from("");
 				} else {
 					println!("?");
 				}
@@ -121,11 +133,11 @@ fn run_command(args: &Cli, command: String, addr: &mut usize, buffer: &mut Vec<S
 		"w" => {
 			let mut content = String::from("");
 
-			for line in buffer {
+			for line in state.buffer.iter() {
 				content.push_str((line.to_owned() + "\n").as_str());
 			}
 
-			fs::write(&args.path, content.as_bytes()).expect("could not write file");
+			fs::write(&state.args.path, content.as_bytes()).expect("could not write file");
 		},
 		"q" => {
 			return false;
@@ -137,10 +149,10 @@ fn run_command(args: &Cli, command: String, addr: &mut usize, buffer: &mut Vec<S
 			if n.is_match(ln) {
 				let line_num = ln.parse::<usize>().unwrap();
 
-				if line_num >= buffer.len() {
+				if line_num >= state.buffer.len() {
 					println!("?");
 				} else {
-					*addr = line_num;
+					*state.addr = line_num;
 				}
 			} else {
 				println!("?");
