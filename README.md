@@ -33,6 +33,7 @@ Secondly, some terminology:
 | `-` | Decrement the current address by one line.
 | `<n>`, where `<n>` is a number | Sets the current address to the line at the given `<n>`.
 | `a` | Enters insert mode, appending after the current address. Inputting `.` on a new line will exit insert mode. Note that with each line inserted, the current address will increment.
+| `A` | Enters insert mode, prepending before the current address. Inputting `.` on a new line will exit insert mode. Again, with each line inserted, the current address will increment.
 | `c` | Enters insert mode, replacing the line pointed to by the current address. Inputting `.` will exit insert mode without changes.
 | `d` | Deletes the line pointed to by the current address. If this at the end of the file, then this will decrement the current address.
 | `y` | Yanks (copies) the line pointed to by the current address. This will put the line in an internal buffer rather than the clipboard.

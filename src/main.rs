@@ -118,6 +118,20 @@ fn run_command(state: &mut State, command: String) -> bool {
 				*state.addr += 1;
 			}
 		},
+		"A" => {
+			loop {
+				let mut line = String::new();
+				std::io::stdin().read_line(&mut line).unwrap();
+				line = line.trim().to_string();
+
+				if line.as_str() == "." {
+					break;
+				}
+
+				state.buffer.insert(*state.addr as usize , line);
+				*state.addr += 1;
+			}
+		},
 		"c" => {
 			let mut line = String::new();
 			std::io::stdin().read_line(&mut line).unwrap();
