@@ -19,7 +19,7 @@ Let me explain:
 BetterThanVim can be installed by doing the following:
 1. Cloning this repo (`git clone https://github.com/eric-unc/queerhack2020.git`).
 2. Entering the directory (`cd queerhack2020`) and installing through Cargo (`cargo install --path .`).
-3. _Optional, but recommended:_ Creating an alias (`alias btv='better_than_vim'`).
+3. _Optional, but recommended:_ Creating an alias (`alias btv='better_than_vim'` on Linux).
 
 ## Running
 To run BTV, you can do `btv file.md` (or if you didn't create an alias, `better_than_vim file.md`). Here, `file.md` is the file you want to edit (if the file does not exist, then BTV will create an empty file).
