@@ -25,6 +25,10 @@ Secondly, some terminology:
 | Command | Description
 | :------ | :------
 | `.` | Prints the line at the current address.
+| `^` | Set the current address to the first line.
+| `$` | Set the current address to the last line.
+| `+` | Increment the current address by one line.
+| `-` | Decrement the current address by one line.
 | `<n>`, where `<n>` is a number | Sets the current address to the line at the given `<n>`.
 | `a` | Enters append mode, appending after the current address. Inputting `.` on a new line will exit append mode. Note that with each line inserted, the current address will increment.
 | `w` | Saves the buffer to disk.

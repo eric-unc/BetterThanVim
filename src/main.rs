@@ -60,6 +60,26 @@ fn run_command(args: &Cli, command: String, addr: &mut usize, buffer: &mut Vec<S
 		"." => {
 			println!("{}", buffer[*addr]);
 		},
+		"^" => {
+			*addr = 0;
+		},
+		"$" => {
+			*addr = buffer.len() - 1;
+		},
+		"+" => {
+			if *addr + 1 >= buffer.len() {
+				println!("?");
+			} else {
+				*addr += 1;
+			}
+		},
+		"-" => {
+			if *addr - 1 < 0 {
+				println!("?");
+			} else {
+				*addr += 1;
+			}
+		},
 		"a" => {
 			loop {
 				let mut line = String::new();
