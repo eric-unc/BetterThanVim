@@ -1,9 +1,10 @@
 use std::fs;
 use std::fs::File;
 use std::fs::OpenOptions;
-//use std::io::Read;
 use std::io::BufReader;
 use std::io::BufRead;
+
+use regex::Regex;
 use structopt::StructOpt;
 
 #[derive(Debug, StructOpt)]
@@ -53,7 +54,9 @@ fn prompt(args: &Cli, addr: &mut usize, buffer: &mut Vec<String>) -> bool {
 }
 
 fn run_command(args: &Cli, command: String, addr: &mut usize, buffer: &mut Vec<String>) -> bool {
-	match command.trim() {
+	let ln = command.trim();
+
+	match ln {
 		"." => {
 			println!("{}", buffer[*addr]);
 		},
@@ -84,7 +87,20 @@ fn run_command(args: &Cli, command: String, addr: &mut usize, buffer: &mut Vec<S
 			return false;
 		},
 		_ => {
-			println!("?");
+			// TODO: I can't figure out how to make this static.
+			let n = Regex::new("^(\\d+)$").unwrap();
+
+			if n.is_match(ln) {
+				let line_num = ln.parse::<usize>().unwrap();
+
+				if line_num >= buffer.len() {
+					println!("?");
+				} else {
+					*addr = line_num;
+				}
+			} else {
+				println!("?");
+			}
 		}
 	}
 

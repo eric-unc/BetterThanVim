@@ -25,6 +25,7 @@ Secondly, some terminology:
 | Command | Description
 | :------ | :------
 | `.` | Prints the line at the current address.
+| `<n>`, where `<n>` is a number | Prints the line at the given `<n>`.
 | `a` | Enters append mode, appending after the current address. Inputting `.` on a new line will exit append mode. Note that with each line inserted, the current address will increment.
 | `w` | Saves the buffer to disk.
 | `q` | Quits BTV.
@@ -33,9 +34,7 @@ Secondly, some terminology:
 * [Rust](https://github.com/rust-lang/rust)
   * [Cargo](https://github.com/rust-lang/cargo)
   * [structopt](https://github.com/TeXitoi/structopt)
-* [ed](https://www.gnu.org/software/ed/)
-* [Vim](https://github.com/vim/vim) (unfortunately)
-* BetterThanVim (fortunately)
+  * [regex](https://github.com/rust-lang/regex)
 
 ## Authors
 1. Eric Schneider
