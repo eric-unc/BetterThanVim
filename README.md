@@ -16,7 +16,7 @@ Let me explain:
 5. BTV doesn't steal you data. Not saying that Vim does, I'm just saying that BTV doesn't.
 
 ## Commands (WIP)
-First, BTV can be run (as of now) by doing `cargo run -- file.md` where `file.md` is the file you want to edit. Then, BTV will ask for commands.
+First, BTV can be run (as of now) by doing `cargo run -- file.md` where `file.md` is the file you want to edit (if the file does not exist, then BTV will create an empty ifle). Then, BTV will ask for commands.
 
 Secondly, some terminology: the _current address_ is a specific line number that BTV is pointing at. This is similar to a cursor in an interactive text editor. The _buffer_ is the modified contents of your file stored in memory. Keep in mind, the buffer will not be saved to disk until you, well, save it to disk (you can do this using `w` as noted below).
 
@@ -31,6 +31,7 @@ Secondly, some terminology: the _current address_ is a specific line number that
 * [Rust](https://github.com/rust-lang/rust)
   * [Cargo](https://github.com/rust-lang/cargo)
   * [structopt](https://github.com/TeXitoi/structopt)
+  * [text_io](https://github.com/oli-obk/rust-si)
 * [ed](https://www.gnu.org/software/ed/)
 * [Vim](https://github.com/vim/vim) (unfortunately)
 * BetterThanVim (fortunately)

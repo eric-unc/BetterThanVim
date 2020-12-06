@@ -35,22 +35,40 @@ fn prompt(args: &Cli, content: &mut String) -> bool {
 
 	let mut line = String::new();
 	std::io::stdin().read_line(&mut line).unwrap();
+	//let line = read!("{}\n");
 
 	return run_command(&args, line, content);
 }
 
 fn run_command(args: &Cli, command: String, content: &mut String) -> bool {
-	match command.as_str() {
-		".\n" => {
-			// TODO
+	match command.trim() {
+		"." => {
+			println!("Apologies, this isn't supported yet");
 		},
-		"a\n" => {
-			// TODO
+		"a" => {
+			loop {
+				let mut line = String::new();
+				std::io::stdin().read_line(&mut line).unwrap();
+
+				if line.as_str().trim() == "." {
+					if args.debug {
+						println!("Exiting append mode.");
+					}
+
+					break;
+				}
+
+				content.push_str(line.as_str());
+
+				if args.debug {
+					println!("Appending {}", line);
+				}
+			}
 		},
-		"w\n" => {
+		"w" => {
 			fs::write(&args.path, content.as_bytes()).expect("could not write file");
 		},
-		"q\n" => {
+		"q" => {
 			return false;
 		},
 		_ => {
