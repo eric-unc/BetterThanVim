@@ -74,7 +74,7 @@ fn run_command(args: &Cli, command: String, addr: &mut usize, buffer: &mut Vec<S
 			}
 		},
 		"-" => {
-			if *addr - 1 < 0 {
+			if *addr == 0 {
 				println!("?");
 			} else {
 				*addr += 1;
@@ -92,6 +92,30 @@ fn run_command(args: &Cli, command: String, addr: &mut usize, buffer: &mut Vec<S
 
 				buffer.insert((*addr as usize) + 1 , line);
 				*addr += 1;
+			}
+		},
+		"c" => {
+			let mut line = String::new();
+			std::io::stdin().read_line(&mut line).unwrap();
+			line = line.trim().to_string();
+
+			if line.as_str() != "." {
+				buffer[*addr] = line;
+			}
+		},
+		"d" => {
+			if *addr != 0 {
+				buffer.remove(*addr);
+
+				if *addr == buffer.len() {
+					*addr -= 1;
+				}
+			} else {
+				if buffer[0].as_str() != "" {
+					buffer[0] = String::from("");
+				} else {
+					println!("?");
+				}
 			}
 		},
 		"w" => {

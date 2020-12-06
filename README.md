@@ -16,7 +16,7 @@ Let me explain:
 5. BTV doesn't steal you data. Not saying that Vim does, I'm just saying that BTV doesn't.
 
 ## Commands (WIP)
-First, BTV can be run (as of now) by doing `cargo run -- file.md` where `file.md` is the file you want to edit (if the file does not exist, then BTV will create an empty ifle). Then, BTV will ask for commands.
+First, BTV can be run (as of now) by doing `cargo run -- file.md` where `file.md` is the file you want to edit (if the file does not exist, then BTV will create an empty file). Then, BTV will ask for commands.
 
 Secondly, some terminology:
 * The _current address_ is a specific line number that BTV is pointing at. This is similar to a cursor in an interactive text editor. BTV will start with the current address pointed to the last line of the file. Note that the line numbers (for now) start at 0, as is customary in programming.
@@ -30,7 +30,9 @@ Secondly, some terminology:
 | `+` | Increment the current address by one line.
 | `-` | Decrement the current address by one line.
 | `<n>`, where `<n>` is a number | Sets the current address to the line at the given `<n>`.
-| `a` | Enters append mode, appending after the current address. Inputting `.` on a new line will exit append mode. Note that with each line inserted, the current address will increment.
+| `a` | Enters insert mode, appending after the current address. Inputting `.` on a new line will exit insert mode. Note that with each line inserted, the current address will increment.
+| `c` | Enters insert mode, replacing the line pointed to by the current address. Inputting `.` will exit insert mode without changes.
+| `d` | Deletes the line pointed to by the current address. If this at the end of the file, then this will decrement the current address.
 | `w` | Saves the buffer to disk.
 | `q` | Quits BTV.
 
