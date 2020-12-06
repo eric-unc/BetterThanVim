@@ -25,7 +25,7 @@ Secondly, some terminology:
 | Command | Description
 | :------ | :------
 | `.` | Prints the line at the current address.
-| `<n>`, where `<n>` is a number | Prints the line at the given `<n>`.
+| `<n>`, where `<n>` is a number | Sets the current address to the line at the given `<n>`.
 | `a` | Enters append mode, appending after the current address. Inputting `.` on a new line will exit append mode. Note that with each line inserted, the current address will increment.
 | `w` | Saves the buffer to disk.
 | `q` | Quits BTV.
