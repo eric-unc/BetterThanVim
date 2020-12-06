@@ -41,13 +41,13 @@ fn prompt(args: &Cli, content: &mut String) -> bool {
 
 fn run_command(args: &Cli, command: String, content: &mut String) -> bool {
 	match command.as_str() {
-		"." => {
+		".\n" => {
 			// TODO
 		},
-		"a" => {
+		"a\n" => {
 			// TODO
 		},
-		"w" => {
+		"w\n" => {
 			fs::write(&args.path, content.as_bytes()).expect("could not write file");
 		},
 		"q\n" => {
