@@ -23,10 +23,6 @@ fn main(){
 	let args = Cli::from_args();
 
 	if !&args.path.exists() {
-		if args.debug {
-			println!("Creating file as it doesn't currently exist.");
-		}
-
 		File::create(&args.path).expect("could not write file");
 	}
 
@@ -43,10 +39,6 @@ fn main(){
 		.for_each(|l| buffer.push(l.expect("could not read line")) );
 
 	let mut addr: usize = buffer.len() - 1;
-
-	if args.debug {
-		println!("{:?}", buffer);
-	}
 
 	while prompt(&args, &mut addr, &mut buffer) {};
 }
@@ -72,30 +64,17 @@ fn run_command(args: &Cli, command: String, addr: &mut usize, buffer: &mut Vec<S
 				line = line.trim().to_string();
 
 				if line.as_str() == "." {
-					if args.debug {
-						println!("Exiting append mode.");
-					}
-
 					break;
-				}
-
-				if args.debug {
-					println!("Appending {}", line);
 				}
 
 				buffer.insert((*addr as usize) + 1 , line);
 				*addr += 1;
 			}
-
-			if args.debug {
-				println!("{:?}", buffer);
-			}
 		},
 		"w" => {
 			let mut content = String::from("");
-			//buffer.for_each(|line| content.push_str(line.to_string()));
+
 			for line in buffer {
-				//content.push_str(line.as_str().to_owned() + "\n");
 				content.push_str((line.to_owned() + "\n").as_str());
 			}
 
