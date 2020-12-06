@@ -18,12 +18,14 @@ Let me explain:
 ## Commands (WIP)
 First, BTV can be run (as of now) by doing `cargo run -- file.md` where `file.md` is the file you want to edit (if the file does not exist, then BTV will create an empty ifle). Then, BTV will ask for commands.
 
-Secondly, some terminology: the _current address_ is a specific line number that BTV is pointing at. This is similar to a cursor in an interactive text editor. The _buffer_ is the modified contents of your file stored in memory. Keep in mind, the buffer will not be saved to disk until you, well, save it to disk (you can do this using `w` as noted below).
+Secondly, some terminology:
+* The _current address_ is a specific line number that BTV is pointing at. This is similar to a cursor in an interactive text editor. BTV will start with the current address pointed to the last line of the file.
+* The _buffer_ is the modified contents of your file stored in memory. Keep in mind, the buffer will not be saved to disk until you, well, save it to disk (you can do this using `w` as noted below).
 
 | Command | Description
 | :------ | :------
 | `.` | Prints the line at the current address.
-| `a` | Enters append mode, appending after the current address. Inputting `.` on a new line will exit append mode.
+| `a` | Enters append mode, appending after the current address. Inputting `.` on a new line will exit append mode. Note that with each line inserted, the current address will increment.
 | `w` | Saves the buffer to disk.
 | `q` | Quits BTV.
 

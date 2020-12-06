@@ -42,22 +42,25 @@ fn main(){
 		.lines()
 		.for_each(|l| buffer.push(l.expect("could not read line")) );
 
-	println!("{:?}", buffer);
+	let mut addr: usize = buffer.len() - 1;
 
-	//while prompt(&args, &mut content) {};
+	if args.debug {
+		println!("{:?}", buffer);
+	}
+
+	while prompt(&args, &mut addr, &mut buffer) {};
 }
 
-fn prompt(args: &Cli, content: &mut String) -> bool {
+fn prompt(args: &Cli, addr: &mut usize, buffer: &mut Vec<String>) -> bool {
 	//print!("{}", args.prompt); // For some reason this isn't working rn
 
 	let mut line = String::new();
 	std::io::stdin().read_line(&mut line).unwrap();
-	//let line = read!("{}\n");
 
-	return run_command(&args, line, content);
+	return run_command(&args, line, addr, buffer);
 }
 
-fn run_command(args: &Cli, command: String, content: &mut String) -> bool {
+fn run_command(args: &Cli, command: String, addr: &mut usize, buffer: &mut Vec<String>) -> bool {
 	match command.trim() {
 		"." => {
 			println!("Apologies, this isn't supported yet");
@@ -66,8 +69,9 @@ fn run_command(args: &Cli, command: String, content: &mut String) -> bool {
 			loop {
 				let mut line = String::new();
 				std::io::stdin().read_line(&mut line).unwrap();
+				line = line.trim().to_string();
 
-				if line.as_str().trim() == "." {
+				if line.as_str() == "." {
 					if args.debug {
 						println!("Exiting append mode.");
 					}
@@ -75,15 +79,20 @@ fn run_command(args: &Cli, command: String, content: &mut String) -> bool {
 					break;
 				}
 
-				content.push_str(line.as_str());
-
 				if args.debug {
-					println!("Appending {}", line.trim());
+					println!("Appending {}", line);
 				}
+
+				buffer.insert((*addr as usize) + 1 , line);
+				*addr += 1;
+			}
+
+			if args.debug {
+				println!("{:?}", buffer);
 			}
 		},
 		"w" => {
-			fs::write(&args.path, content.as_bytes()).expect("could not write file");
+			//fs::write(&args.path, content.as_bytes()).expect("could not write file");
 		},
 		"q" => {
 			return false;
