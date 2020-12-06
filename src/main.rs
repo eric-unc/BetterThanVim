@@ -30,7 +30,7 @@ fn main(){
 		File::create(&args.path).expect("could not write file");
 	}
 
-	let mut file = OpenOptions::new()
+	let file = OpenOptions::new()
 		.read(true)
 		.write(true)
 		.open(&args.path)
@@ -92,7 +92,14 @@ fn run_command(args: &Cli, command: String, addr: &mut usize, buffer: &mut Vec<S
 			}
 		},
 		"w" => {
-			//fs::write(&args.path, content.as_bytes()).expect("could not write file");
+			let mut content = String::from("");
+			//buffer.for_each(|line| content.push_str(line.to_string()));
+			for line in buffer {
+				//content.push_str(line.as_str().to_owned() + "\n");
+				content.push_str((line.to_owned() + "\n").as_str());
+			}
+
+			fs::write(&args.path, content.as_bytes()).expect("could not write file");
 		},
 		"q" => {
 			return false;
