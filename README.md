@@ -26,6 +26,7 @@ Secondly, some terminology:
 | :------ | :------
 | `.` | Prints the line at the current address.
 | `.<n>`, where `<n>` is a number | Prints the line at the given address.
+| `r` | Prints the current address.
 | `^` | Set the current address to the first line.
 | `$` | Set the current address to the last line.
 | `+` | Increment the current address by one line.

@@ -81,6 +81,9 @@ fn run_command(state: &mut State, command: String) -> bool {
 		"." => {
 			println!("{}", state.buffer[*state.addr]);
 		},
+		"r" => {
+			println!("{}", *state.addr);
+		},
 		"^" => {
 			*state.addr = 0;
 		},
