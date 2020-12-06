@@ -55,7 +55,7 @@ fn prompt(args: &Cli, addr: &mut usize, buffer: &mut Vec<String>) -> bool {
 fn run_command(args: &Cli, command: String, addr: &mut usize, buffer: &mut Vec<String>) -> bool {
 	match command.trim() {
 		"." => {
-			println!("Apologies, this isn't supported yet");
+			println!("{}", buffer[*addr]);
 		},
 		"a" => {
 			loop {
