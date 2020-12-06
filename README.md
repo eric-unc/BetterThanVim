@@ -15,13 +15,22 @@ Let me explain:
 4. BTV is written in Rust. You might be wondering: why does this make BTV better? Well, just take a look at [this crab](https://www.rustacean.net/).
 5. BTV doesn't steal you data. Not saying that Vim does, I'm just saying that BTV doesn't.
 
-## Commands (WIP)
-First, BTV can be run (as of now) by doing `cargo run -- file.md` where `file.md` is the file you want to edit (if the file does not exist, then BTV will create an empty file). Then, BTV will ask for commands.
+## Installation
+BetterThanVim can be installed by doing the following:
+1. Cloning this repo (`git clone https://github.com/eric-unc/queerhack2020.git`).
+2. Entering the directory (`cd queerhack2020`) and installing through Cargo (`cargo install --path .`).
+3. _Optional, but recommended:_ Creating an alias (`alias btv='better_than_vim'`).
+
+## Running
+To run BTV, you can do `btv file.md` (or if you didn't create an alias, `better_than_vim file.md`). Here, `file.md` is the file you want to edit (if the file does not exist, then BTV will create an empty file).
+
+After running, BTV will then ask for commands.
 
 Secondly, some terminology:
 * The _current address_ is a specific line number that BTV is pointing at. This is similar to a cursor in an interactive text editor. BTV will start with the current address pointed to the last line of the file. Note that the line numbers (for now) start at 0, as is customary in programming.
 * The _buffer_ is the modified contents of your file stored in memory. Keep in mind, the buffer will not be saved to disk until you, well, save it to disk (you can do this using `w` as noted below).
 
+### Commands
 | Command | Description
 | :------ | :------
 | `.` | Prints the line at the current address.
