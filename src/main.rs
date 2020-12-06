@@ -23,7 +23,14 @@ struct Cli {
 struct State<'a> {
 	args: &'a Cli,
 	buffer: &'a mut Vec<String>,
-	addr: &'a mut usize
+	addr: &'a mut usize,
+	yank_buffer: &'a mut String
+}
+
+impl<'a> State<'a> {
+	pub fn new(args: &'a Cli, buffer: &'a mut Vec<String>, addr: &'a mut usize, yank_buffer: &'a mut String) -> State<'a> {
+		State { args: args, buffer: buffer, addr: addr, yank_buffer: yank_buffer }
+	}
 }
 
 fn main(){
@@ -51,7 +58,9 @@ fn main(){
 
 	let mut addr: usize = buffer.len() - 1;
 
-	let mut state = State{args: &args, buffer: &mut buffer, addr: &mut addr};
+	let mut yank_buffer = String::from("");
+
+	let mut state = State::new(&args, &mut buffer, &mut addr, &mut yank_buffer);
 
 	while prompt(&mut state) {};
 }
@@ -128,6 +137,17 @@ fn run_command(state: &mut State, command: String) -> bool {
 				} else {
 					println!("?");
 				}
+			}
+		},
+		"y" => {
+			*state.yank_buffer = state.buffer[*state.addr].clone();
+		},
+		"p" => {
+			if state.yank_buffer.as_str() != "" {
+				state.buffer.insert((*state.addr as usize) + 1 , state.yank_buffer.clone());
+				*state.addr += 1;
+			} else {
+				println!("?");
 			}
 		},
 		"w" => {
