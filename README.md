@@ -60,7 +60,7 @@ Secondly, some terminology:
 
 ## Demos
 * [Short demo](https://www.youtube.com/watch?v=pbjB_qQMLzM)
-* [Longer demo](https://www.youtube.com/watch?v=Ih2jxBSz5xI)
+* [Longer demo](https://www.youtube.com/watch?v=supFiNHq1Rs)
 
 Note these demos were made during or directly after the hackathon, thus only basic functionality is shown.
 
