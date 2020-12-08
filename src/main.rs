@@ -220,8 +220,6 @@ fn run_command(state: &mut State, command: String) -> bool {
 			} else if dot_n.is_match(ln) {
 				let cap = dot_n.captures(ln).unwrap();
 
-				println!("{}", &cap[1]);
-
 				let line_num = (&cap[1]).parse::<usize>().unwrap();
 
 				if line_num >= state.buffer.len() {

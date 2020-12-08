@@ -58,5 +58,11 @@ Secondly, some terminology:
   * [structopt](https://github.com/TeXitoi/structopt)
   * [regex](https://github.com/rust-lang/regex)
 
+## Demos
+* [Short demo](https://www.youtube.com/watch?v=pbjB_qQMLzM)
+* [Longer demo](https://www.youtube.com/watch?v=Ih2jxBSz5xI)
+
+Note these demos were made during or directly after the hackathon, thus only basic functionality is shown.
+
 ## Authors
 1. Eric Schneider
